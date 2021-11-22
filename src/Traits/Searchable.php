@@ -15,31 +15,32 @@ Trait Searchable
             if ($this->guideObject == null || $value == null || $this->searchableFields == null) {
                 return $query2;
             }
-            return $this->appendToQuery($query2, $value, $typical)->sort();
+            return $this->appendToQuery($query2, $value, $typical);
+            // ->sort();
         });
     }
 
-    public function scopeSort($query, $direction = null)
-    {
-        $availableValues = ['asc', 'desc'];
-        $direction = $direction != null ? $direction : request()->sort;
-        $direction = \in_array($direction, $availableValues) ? $direction : 'asc';
-        return $query->orderBy($this->sortingField(), $direction);
-    }
+    // public function scopeSort($query, $direction = null)
+    // {
+    //     $availableValues = ['asc', 'desc'];
+    //     $direction = $direction != null ? $direction : request()->sort;
+    //     $direction = \in_array($direction, $availableValues) ? $direction : 'asc';
+    //     return $query->orderBy($this->sortingField(), $direction);
+    // }
 
-    public function sortingField()
-    {
-        switch (true) {
-            case request()->sort_by != null && \in_array(request()->sort_by, \array_keys($this->guideObject->getAttributes())) :
-                return request()->sort_by;
-            case \in_array('id', \array_keys($this->guideObject->getAttributes())) :
-                return 'id';
-            case \in_array('created_at', \array_keys($this->guideObject->getAttributes())) :
-                return 'created_at';
-            default :
-                return \array_keys($this->guideObject->getAttributes())[0];
-        }
-    }
+    // public function sortingField()
+    // {
+    //     switch (true) {
+    //         case request()->sort_by != null && \in_array(request()->sort_by, \array_keys($this->guideObject->getAttributes())) :
+    //             return request()->sort_by;
+    //         case \in_array('id', \array_keys($this->guideObject->getAttributes())) :
+    //             return 'id';
+    //         case \in_array('created_at', \array_keys($this->guideObject->getAttributes())) :
+    //             return 'created_at';
+    //         default :
+    //             return \array_keys($this->guideObject->getAttributes())[0];
+    //     }
+    // }
 
     private function appendToQuery($query1, $value, $typical = false)
     {
@@ -59,7 +60,7 @@ Trait Searchable
                     $query1->$queryStatement("{$table}.{$this->searchableFields[$i]}", $operator, $value);
             }
         }
-        return $query1->sort();
+        return $query1;
     }
 
     private function searchableFields()
