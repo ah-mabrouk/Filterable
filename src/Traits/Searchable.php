@@ -19,12 +19,12 @@ Trait Searchable
         });
     }
 
-    public function scopeSort($direction = null)
+    public function scopeSort($query, $direction = null)
     {
         $availableValues = ['asc', 'desc'];
         $direction = $direction != null ? $direction : request()->sort;
         $direction = \in_array($direction, $availableValues) ? $direction : 'asc';
-        return $this->builder->orderBy($this->sortingField(), $direction);
+        return $query->orderBy($this->sortingField(), $direction);
     }
 
     public function sortingField()
