@@ -1,0 +1,37 @@
+{
+    "name": "mabrouk/filterable",
+    "description": "a laravel package to filter model results the most convenient way",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmed Mabrouk",
+            "email": "a.mabrouk25@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "laravel/framework": ">=6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0@dev"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mabrouk\\Filterable\\FilterableServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Mabrouk\\Filterable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
